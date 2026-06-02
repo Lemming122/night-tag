@@ -205,7 +205,7 @@ def titledata():
         "SeasonalStoreBoardSign": "<color=red>RATE THE GAME 5 STARS!</color>\n<color=blue>.GG/vHTgkgEgts</color>",
         # Text and Messages
         "EmptyFlashbackText": "FLOOR TWO NOW OPEN\n FOR BUSINESS\n\nSTILL SEARCHING FOR\nBOX LABELED 2021",
-        "MOTD": "<color=#ff00e3>WELCOME TO NIGHT TAG!</color>\n\n<color=#ff001d>CURRENT UPDATE: HALLOWEEN 2024</color>\n<color=#00eaff>BOOST 4 TIMES FOR EVERY COSMETIC </color>\n<color=#41ff80>YANDERE MADE THIS MOTD</color>\n<color=#6417ff>OUR DEVELOPERS ARE: FATAL & CASHSMILE</color>\n<color=#ac1a00>CREDITS FOR GAMES OG OS: VIPER</color>\n\n<color=#91A3B0>DISCORD.GG/vHTgkgEgts</color>",
+        "MOTD": "<color=#ff00e3>WELCOME TO NIGHT TAG!</color>\n\n<color=#ff001d>CURRENT UPDATE: HALLOWEEN 2024</color>\n<color=#00eaff>BOOST 4 TIMES FOR EVERY COSMETIC </color>\n<color=#41ff80>HARMONY IS THE DEVELOPER</color>\n<color=#6417ff>OUR OWNERS ARE : ZEON :</color>\n<color=#ff6900>YOU CAN SUPPORT US WITH CASHAPP.</color>\n\n<color=#00ff12>DISCORD.GG/vHTgkgEgts</color>",
         "TOBAlreadyOwnCompTxt": "DISCORD.GG/vHTgkgEgts",
         "TOBAlreadyOwnPurchaseBundle": "CHRISTMAS TAG",
         "TOBDefCompTxt": "DISCORD.GG/vHTgkgEgts",

@@ -17,6 +17,7 @@ def get_auth_headers():
 @app.route('/api/TD', methods=['POST'])
 def titled_data():
     return jsonify({"WELCOME TOO NIGHT TAG WE ARE IN THE GT4 UPDATE OWNERS : HARMONY : ZEON":" (WELCOME TOO NIGHT TAG WE ARE IN THE GT4 UPDATE OWNERS : HARMONY : ZEON) "})
+    "MOTD": "<color=#FFC0CB>WELCOME TO NIGHT TAG!</color>\n\n<color=#0099c2>CURRENT UPDATE: GT4</color>\n<color=#cacfd2>BOOST THE DISCORD FOR ALL COSMETICS</color>\n<color=#41ff80>HARMONY IS THE DEV</color>\n<color=#6417ff>OUR OWNERS ARE ZEON AND HARMONY</color>\n<color=#ac1a00>TUNG TUNG TUNG TUNG TUNG TUNG TUNG SAHUR</color>\n\n<color=#91A3B0>discord.gg/7eYuSCKPJ2</color>",
 
 @app.route("/api/PlayFabAuthentication", methods=["POST"])
 def playfab_authentication():

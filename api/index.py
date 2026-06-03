@@ -301,7 +301,7 @@ def GetNameIg():
 
 @app.route("/api/photon/authenticate", methods=["POST"])
 def photonauth():
-    print(f"Received {request.method} request at /api/photon")
+    print(f"Received {request.method} request at https://night-tag.vercel.app/api/photon")
     getjson = request.get_json()
     Ticket = getjson.get("Ticket")
     Nonce = getjson.get("Nonce")

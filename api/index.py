@@ -1,217 +1,180 @@
 import requests
 import random
 from flask import Flask, jsonify, request
-import json
-import os
-import base64
+# This can do any update up to prop haunt * i havent tested lastest *
+# IF YOU USE THIS PUT FATE IN YOU MOTD!
+# discord.gg/apkland
 
 class GameInfo:
+
     def __init__(self):
-        self.TitleId: str = "D1EFA" # Playfab Title Id
-        self.SecretKey: str = "P6AQTTAGMZF8DKBA9GA1FHGPP7CD9FTR5NUXD9FWABQWMK8PWD" # Playfab Secret Key
-        self.ApiKey: str = "OC|1166687326522250|48a0ae0aa1cb7a093dac311d9ae6424a" # App Api Key
+        self.TitleId: str = "D1EFA"
+        self.SecretKey: str = "P6AQTTAGMZF8DKBA9GA1FHGPP7CD9FTR5NUXD9FWABQWMK8PWD"
+        self.ApiKey: str = "OC|1166687326522250|48a0ae0aa1cb7a093dac311d9ae6424a"
 
     def get_auth_headers(self):
-        return {"content-type": "application/json", "X-SecretKey": self.SecretKey}
+        return {
+            "content-type": "application/json",
+            "X-SecretKey": self.SecretKey
+        }
 
 
 settings = GameInfo()
 app = Flask(__name__)
+playfab_cache = {}
+mute_cache = {}
 
-def ReturnFunctionJson(data, funcname, funcparam={}):
-    rjson = data["FunctionParameter"]
-    userId: str = rjson.get("CallerEntityProfile").get("Lineage").get(
-        "TitlePlayerAccountId")
+settings.TitleId = ""
+settings.SecretKey = ""
+settings.ApiKey = ""
 
-    req = requests.post(
-        url=f"https://{settings.TitleId}.playfabapi.com/Server/ExecuteCloudScript",
+
+def return_function_json(data, funcname, funcparam={}):
+    user_id = data["FunctionParameter"]["CallerEntityProfile"]["Lineage"][
+        "TitlePlayerAccountId"]
+
+    response = requests.post(
+        url=
+        f"https://{settings.TitleId}.playfabapi.com/Server/ExecuteCloudScript",
         json={
-            "PlayFabId": userId,
+            "PlayFabId": user_id,
             "FunctionName": funcname,
             "FunctionParameter": funcparam
         },
-        headers=settings.GetAuthHeaders())
+        headers=settings.get_auth_headers())
 
-    if req.status_code == 200:
-        return jsonify(
-            req.json().get("data").get("FunctionResult")), req.status_code
+    if response.status_code == 200:
+        return jsonify(response.json().get("data").get(
+            "FunctionResult")), response.status_code
     else:
-        return jsonify({}), req.status_code
+        return jsonify({}), response.status_code
 
 
-def GetIsNonceValid(nonce: str, oculusId: str):
-    req = requests.post(
-        url=f'https://graph.oculus.com/user_nonce_validate?nonce=' + nonce +
-        '&user_id=' + oculusId + '&access_token=' + settings.ApiKey,
+def get_is_nonce_valid(nonce, oculus_id):
+    response = requests.post(
+        url=
+        f'https://graph.oculus.com/user_nonce_validate?nonce={nonce}&user_id={oculus_id}&access_token={settings.ApiKey}',
+        url1=
+        f'https://graph.oculus.com/user_nonce_validate?nonce={nonce}&user_id={oculus_id}&access_token={settings.ApiKey1}',
         headers={"content-type": "application/json"})
-    return req.json().get("is_valid")
+    return response.json().get("is_valid")
 
 
 @app.route("/", methods=["POST", "GET"])
 def main():
-    return """
-        <html>
-            <head>
-                <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-            </head>
-            <body style="font-family: 'Inter', sans-serif;">
-                <h1 style="color: red; font-size: 30px;">
-                    YO WORKING 2025 BACKEND FOR NIGHT TAG 
-                </h1>
-            </body>
-        </html>
-    """
+    return "hey your not suppose to be herre you dummy, stop tyna mod the game!"
 
-@app.route("/api/PlayFabAuthentication", methods=["POST"])
-def playfab_authentication():
-    rjson = request.get_json()
-    required_fields = ["Nonce", "AppId", "Platform", "OculusId"]
-    missing_fields = [field for field in required_fields if not rjson.get(field)]
 
-    if missing_fields:
-        return (
-            jsonify(
-                {
-                    "Message": f"Missing parameter(s): {', '.join(missing_fields)}",
-                    "Error": f"BadRequest-No{missing_fields[0]}",
-                }
-            ),
-            401,
-        )
+@app.route("/api/CachePlayFabId", methods=["GET", "POST"])
+def cacheplayfabid():
 
-    if rjson.get("AppId") != settings.TitleId:
-        return (
-            jsonify(
-                {
-                    "Message": "Request sent for the wrong App ID",
-                    "Error": "BadRequest-AppIdMismatch",
-                }
-            ),
-            400,
-        )
+  left_pocket_dog_shit = request.get_json()
 
-    url = f"https://{settings.TitleId}.playfabapi.com/Server/LoginWithServerCustomId"
-    login_request = requests.post(
-        url=url,
-        json={
-            "ServerCustomId": "OCULUS" + rjson.get("OculusId"),
-            "CreateAccount": True,
+  plat = left_pocket_dog_shit.get("Platform")
+  plat_userId = left_pocket_dog_shit.get("PlatformUserId")
+  session_ticket = left_pocket_dog_shit.get("SessionTicket")
+  playfab_id = left_pocket_dog_shit.get("PlayFabId")
+  title_id = left_pocket_dog_shit.get("TitleId")
+
+  return jsonify({
+    "Message": "Yay Your Authed",
+    "PlayFabId": playfab_id,
+    "KidAccessToken": left_pocket_dog_shit.get("KidAccessToken"),
+    "KidRefreshToken": left_pocket_dog_shit.get("KidRefreshToken"),
+    "KidUrlBasePath": left_pocket_dog_shit.get("KidUrlBasePath"),
+    "LocationCode": left_pocket_dog_shit.get("LocationCode")
+  }), 200
+
+
+@app.route("/api/PlayFabAuthentication", methods=["POST","GET"])
+def skibidi():
+    pluh = request.get_json()
+    app_id = pluh.get('AppId')
+    app_version = pluh.get('AppVersion')
+    nonce = pluh.get('Nonce')
+    oculus_id = pluh.get('OculusId')
+    platform = pluh.get('Platform')
+    age_catagory = pluh.get('AgeCategory')
+    mother_token = pluh.get('MothershipToken')
+    mother_shipid = pluh.get('MothershipId')
+
+    login_req = requests.post(
+        url = f'https://{settings.TitleId}.playfabapi.com/Server/LoginWithServerCustomId',
+        json = {
+            'ServerCustomId': "OCULUS" + oculus_id,
+            'CreateAccount': True
         },
-        headers=settings.get_auth_headers(),
-    )
+        headers = {
+            'X-SecretKey': settings.SecretKey,
+            'Content-Type': 'application/json'
+        })
 
-    if login_request.status_code == 200:
-        data = login_request.json().get("data")
-        session_ticket = data.get("SessionTicket")
-        entity_token = data.get("EntityToken").get("EntityToken")
-        playfab_id = data.get("PlayFabId")
-        entity_type = data.get("EntityToken").get("Entity").get("Type")
-        entity_id = data.get("EntityToken").get("Entity").get("Id")
+    if login_req.status_code == 200:
+        rjson = login_req.json()
 
-        link_response = requests.post(
-            url=f"https://{settings.TitleId}.playfabapi.com/Server/LinkServerCustomId",
-            json={
-                "ForceLink": True,
-                "PlayFabId": playfab_id,
-                "ServerCustomId": rjson.get("CustomId"),
+        session_ticket = rjson.get('data').get('SessionTicket')
+        entity_token = rjson.get('data').get('EntityToken').get('EntityToken')
+        playfab_id = rjson.get('data').get('PlayFabId')
+        entity_id = rjson.get('data').get('EntityToken').get('Entity').get('Id')
+        entity_type = rjson.get('data').get('EntityToken').get('Entity').get('Type')
+        kid_access_token = rjson.get('data').get('KidAccessToken')
+        kid_refresh_token = rjson.get('data').get('KidRefreshToken')
+        kid_url_base_path = rjson.get('data').get('KidUrlBasePath')
+        location_code = rjson.get('data').get('LocationCode')
+
+        link_req = requests.post(
+            url = f'https://{settings.TitleId}.playfabapi.com/Client/LinkCustomID',
+            json = {
+                'PlayFabId': playfab_id,
+                'CustomId': "OCULUS" + oculus_id,
+                'ForceLink': True
             },
-            headers=settings.get_auth_headers(),
-        ).json()
+            headers = {
+                'X-Authorization': session_ticket,
+                'Content-Type': 'application/json'
+            })
 
-        return (
-            jsonify(
-                {
-                    "PlayFabId": playfab_id,
-                    "SessionTicket": session_ticket,
-                    "EntityToken": entity_token,
-                    "EntityId": entity_id,
-                    "EntityType": entity_type,
-                }
-            ),
-            200,
-        )
-    else:
-        if login_request.status_code == 403:
-            ban_info = login_request.json()
-            if ban_info.get("errorCode") == 1002:
-                ban_message = ban_info.get("errorMessage", "No ban message provided.")
-                ban_details = ban_info.get("errorDetails", {})
-                ban_expiration_key = next(iter(ban_details.keys()), None)
-                ban_expiration_list = ban_details.get(ban_expiration_key, [])
-                ban_expiration = (
-                    ban_expiration_list[0]
-                    if len(ban_expiration_list) > 0
-                    else "No expiration date provided."
-                )
-                print(ban_info)
-                return (
-                    jsonify(
-                        {
-                            "BanMessage": ban_expiration_key,
-                            "BanExpirationTime": ban_expiration,
-                        }
-                    ),
-                    403,
-                )
-            else:
-                error_message = ban_info.get(
-                    "errorMessage", "Forbidden without ban information."
-                )
-                return (
-                    jsonify({"Error": "PlayFab Error", "Message": error_message}),
-                    403,
-                )
-        else:
-            error_info = login_request.json()
-            error_message = error_info.get("errorMessage", "An error occurred.")
+        return jsonify({
+            "SessionTicket": session_ticket,
+            "EntityToken": entity_token,
+            "PlayFabId": playfab_id,
+            "EntityId": entity_id,
+            "EntityType": entity_type,
+            "KidAccessToken": kid_access_token,
+            "KidRefreshToken": kid_refresh_token,
+            "KidUrlBasePath": kid_url_base_path,
+            "LocationCode": location_code
+        }), 200
+    else: 
+        ban_info = login_req.json()
+        if ban_info.get("errorCode") == 1002:
+            ban_message = ban_info.get("errorMessage", "No ban message provided.")
+            ban_details = ban_info.get("errorDetails", {})
+            ban_expiration_key = next(iter(ban_details.keys()), None)
+            ban_expiration_list = ban_details.get(ban_expiration_key, [])
+            ban_expiration = (
+                ban_expiration_list[0]
+                if len(ban_expiration_list) > 0
+                else "Indefinite"
+            )
             return (
-                jsonify({"Error": "PlayFab Error", "Message": error_message}),
-                login_request.status_code,
+                jsonify(
+                    {
+                        "BanMessage": ban_expiration_key,
+                        "BanExpirationTime": ban_expiration,
+                    }
+                ),
+                403
             )
 
+@app.route('/api/TitleData', methods=['POST'])
+def titled_data():
+    return jsonify({"MOTD": "<color=BLUE>WELCOME TO NIGHT TAG</color>\n\n<color=purple>UPDATE: PROP HUNT WITH FIXED PREDICTIONS, HAVE AN UPDATE THAT YOU WANT? REQUEST IT IN THE DISCORD!</color>\n\n<color=blue>DISCORD: https://discord.gg/7eYuSCKPJ2</color>\n\n<color=orange>OWNERS : HARMONY : ZEON :</color>"})
 
-@app.route("/api/CachePlayFabId", methods=["POST"])
-def cache_playfab_id():
-    return jsonify({"Message": "Success"}), 200
-
-
-@app.route('/api/TitleData', methods=['POST', 'GET'])
-def titledata():
-    response_data = {
-        "AutoMuteCheckedHours": {
-            "hours": 169
-        },
-        "AutoName_Adverbs": [
-            "Cool", "Fine", "Bald", "Bold", "Half",
-            "Only", "Calm", "Fab", "Ice", "Mad",
-            "Rad", "Big", "New", "Old", "Shy"
-        ],
-        "AutoName_Nouns": [
-            "Gorilla", "Chicken", "Darling", "Sloth", "King",
-            "Queen", "Royal", "Major", "Actor", "Agent",
-            "Elder", "Honey", "Nurse", "Doctor", "Rebel",
-            "Shape", "Ally", "Driver", "Deputy"
-        ],
-        "BundleBoardSign": "<color=#ff4141>DISCORD.GG/7EYUSCKPJ2</color>",
-        "BundleKioskButton": "<color=#ff4141>DISCORD.GG/7EYUSCKPJ2</color>",
-        "BundleKioskSign": "<color=#ff4141>DISCORD.GG/7EYUSCKPJ2</color>",
-        "BundleLargeSign": "<color=#ff4141>DISCORD.GG/7EYUSCKPJ2</color>",
-        "EmptyFlashbackText": "FLOOR TWO NOW OPEN\n FOR BUSINESS\n\nSTILL SEARCHING FOR\nBOX LABELED 2021",
-        "EnableCustomAuthentication": True,
-        "GorillanalyticsChance": 4320,
-        "LatestPrivacyPolicyVersion": "2024.09.20",
-        "LatestTOSVersion": "2024.09.20",
-        "MOTD": "<color=red>WELCOME TO NIGHT TAGGERS!</color>\n<color=yellow>OWNERS ARE : HARMONY AND ZEON :</color>\n<color=lime>DEVELOPER IS HARMONY</color>\n<color=blue>DISCORD.GG/7EYUSCKPJ2</color>",
-        "SeasonalStoreBoardSign": "<color=red>RATE THE GAME 5 STARS!</color>\n<color=blue>.GG/UNLOADTAG</color>",
-        "TOS_2024.09.20": "DISCORD.GG/TREETAGGERS",
-        "TOBAlreadyOwnCompTxt": "DISCORD.GG/TREETAGGERS",
-        "TOBAlreadyOwnPurchaseBundle": "TREE TAGGERS",
-        "TOBDefCompTxt": "DISCORD.GG/TREETAGGERS",
-        "TOBDefPurchaseBtnDefTxt": "TREE TAGGERS",
-        "UseLegacyIAP": False
-
-    }
-    return jsonify(response_data)
+    if req.status_code == 200:
+        return jsonify(req.json().get("data").get("Data"))
+    else:
+        return jsonify({})
 
 @app.route("/api/ConsumeOculusIAP", methods=["POST"])
 def consume_oculus_iap():
@@ -223,27 +186,15 @@ def consume_oculus_iap():
     sku = rjson.get("sku")
 
     response = requests.post(
-        url=f"https://graph.oculus.com/consume_entitlement?nonce={nonce}&user_id={user_id}&sku={sku}&access_token={settings.ApiKey}",
-        headers={"content-type": "application/json"},
-    )
+        url=
+        f"https://graph.oculus.com/consume_entitlement?nonce={nonce}&user_id={user_id}&sku={sku}&access_token={settings.ApiKey}",
+        headers={"content-type": "application/json"})
 
     if response.json().get("success"):
         return jsonify({"result": True})
     else:
         return jsonify({"error": True})
-
-@app.route("/api/GetAcceptedAgreements", methods=['POST', 'GET'])
-def GetAcceptedAgreements():
-  data = request.json
-
-  return jsonify({"PrivacyPolicy":"1.1.28","TOS":"11.05.22.2"}), 200
-
-@app.route("/api/SubmitAcceptedAgreements", methods=['POST', 'GET'])
-def SubmitAcceptedAgreements():
-  data = request.json
-
-  return jsonify({}), 200
-
+        
 @app.route("/api/ConsumeCodeItem", methods=["POST"])
 def consume_code_item():
     rjson = request.get_json()
@@ -254,8 +205,7 @@ def consume_code_item():
     if not all([code, playfab_id, session_ticket]):
         return jsonify({"error": "Missing parameters"}), 400
 
-    raw_url = f"https://github.com/redapplegtag/backendsfrr" # make a github and put the raw here (Redeemed = not redeemed, u have to add discord webhookss and if your smart you can make it so it auto updates the github url (redeemed is not redeemed, AlreadyRedeemed is already redeemed, then dats it
-    # code:Redeemed
+    raw_url = f"" 
     response = requests.get(raw_url)
 
     if response.status_code != 200:
@@ -288,20 +238,72 @@ def consume_code_item():
     if grant_response.status_code != 200:
         return jsonify({"result": "PlayFabError", "errorMessage": grant_response.json().get("errorMessage", "Grant failed")}), 500
 
-    new_lines = [f"{split[0].strip()}:AlreadyRedeemed" if split[0].strip() == code else line.strip()
+    new_lines = [f"{split[0].strip()}:AlreadyRedeemed" if split[0].strip() == code else line.strip() 
              for line in lines if (split := line.split(":")) and len(split) >= 2]
 
     updated_content = "\n".join(new_lines).strip()
 
     return jsonify({"result": "Success", "itemID": code, "playFabItemName": codes[code]}), 200
 
-@app.route('/api/v2/GetName', methods=['POST', 'GET'])
-def GetNameIg():
-    return jsonify({"result": f"TREE{random.randint(1000,9999)}"})
+@app.route("/api/CheckForBadName", methods=["POST", "GET"])
+def checkforbadname():
+    rjson = request.get_json() 
+    function_result = rjson["FunctionArgument"]
+    playfab_id = rjson["CallerEntityProfile"]["Lineage"]["MasterPlayerAccountId"]
+    name = function_result["name"].upper()
+    forRoom = function_result["forRoom"]
 
-@app.route("/api/photon/authenticate", methods=["POST"])
+    if forRoom == True:
+        return jsonify({"result": 0})
+
+    link_response = requests.post(
+        url=f"https://{settings.titleid}.playfabapi.com/Admin/UpdateUserTitleDisplayName",
+        json={
+            "DisplayName": name,
+            "PlayFabId": playfab_id,
+        },
+        headers=settings.get_auth_headers(),
+    ).json()
+    return jsonify({"result": 0})
+
+@app.route("/api/GetAcceptedAgreements", methods=["POST", "GET"])
+def get_accepted_agreements():
+    rjson = request.get_json()["FunctionResult"]
+    return jsonify(rjson)
+
+@app.route("/api/SubmitAcceptedAgreements", methods=["POST", "GET"])
+def submit_accepted_agreements():
+    rjson = request.get_json()["FunctionResult"]
+    return jsonify(rjson)
+
+@app.route("/api/ReturnMyOculusHashV2")
+def return_my_oculus_hash_v2():
+    return return_function_json(request.get_json(), "ReturnMyOculusHash")
+
+@app.route("/api/ReturnCurrentVersionV2", methods=["POST", "GET"])
+def return_current_version_v2():
+    return return_function_json(request.get_json(), "ReturnCurrentVersion")
+
+@app.route("/api/TryDistributeCurrencyV2", methods=["POST", "GET"])
+def try_distribute_currency_v2():
+    return return_function_json(request.get_json(), "TryDistributeCurrency")
+
+@app.route("/api/BroadCastMyRoomV2", methods=["POST", "GET"])
+def broadcast_my_room_v2():
+    return return_function_json(request.get_json(), "BroadCastMyRoom",
+                                request.get_json()["FunctionParameter"])
+
+@app.route("/api/ShouldUserAutomutePlayer", methods=["POST", "GET"])
+def should_user_automute_player():
+    return jsonify(mute_cache)
+
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=1416)
+
+
+@app.route("/api/photon", methods=["POST"])
 def photonauth():
-    print(f"Received {request.method} request at https://night-tag.vercel.app/api/photon")
+    print(f"Received {request.method} request at /api/photon")
     getjson = request.get_json()
     Ticket = getjson.get("Ticket")
     Nonce = getjson.get("Nonce")
@@ -335,7 +337,7 @@ def photonauth():
             json={"PlayFabId": userId},
             headers={
                 "content-type": "application/json",
-                "X-SecretKey": secretkey
+                "X-SecretKey": settings.SecretKey
             })
 
         print(f"Request to PlayFab returned status code: {req.status_code}")
@@ -427,36 +429,3 @@ def photonauth():
              "Message":
              "Use a POST or GET Method instead of " + request.method.upper()
          })
-
-
-def ReturnFunctionJson(data, funcname, funcparam={}):
-    print(f"Calling function: {funcname} with parameters: {funcparam}")
-    rjson = data.get("FunctionParameter", {})
-    userId = rjson.get("CallerEntityProfile",
-                       {}).get("Lineage", {}).get("TitlePlayerAccountId")
-
-    print(f"UserId: {userId}")
-
-    req = requests.post(
-        url=f"https://{settings.TitleId}.playfabapi.com/Server/ExecuteCloudScript",
-        json={
-            "PlayFabId": userId,
-            "FunctionName": funcname,
-            "FunctionParameter": funcparam
-        },
-        headers={
-            "content-type": "application/json",
-            "X-SecretKey": secretkey
-        })
-
-    if req.status_code == 200:
-        result = req.json().get("data", {}).get("FunctionResult", {})
-        print(f"Function result: {result}")
-        return jsonify(result), req.status_code
-    else:
-        print(f"Function execution failed, status code: {req.status_code}")
-        return jsonify({}), req.status_code
-
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=9080)

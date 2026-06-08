@@ -205,11 +205,11 @@ def titledata():
         "SeasonalStoreBoardSign": "<color=red>RATE THE GAME 5 STARS!</color>\n<color=blue>.GG/XxttY9YjgF</color>",
         # Text and Messages
         "EmptyFlashbackText": "FLOOR TWO NOW OPEN\n FOR BUSINESS\n\nSTILL SEARCHING FOR\nBOX LABELED 2021",
-        "MOTD": "<color=#FFC0CB>WELCOME TO CHRISTMAS TAG!</color>\n\n<color=#0099c2>CURRENT UPDATE: HALLOWEEN 2024</color>\n<color=#cacfd2>BOOST THE DISC 5 TIMES FOR EVERY COSMETIC</color>\n<color=#41ff80>HARMONY MADE THIS MOTD</color>\n<color=#6417ff>OUR OWNERS ARE : HARMONY : ZEON :</color>\n<color=#ac1a00>ADMINS ARE : NYX : AYLA :</color>\n\n<color=#91A3B0>DISCORD.GG/XxttY9YjgF</color>",
+        "MOTD": "<color=#FFC0CB>WELCOME TO NIGHT TAG!</color>\n\n<color=#F5F227>CURRENT UPDATE: NOWRUZ 2024</color>\n<color=#F527EE>BOOST THE DISC 5 TIMES FOR EVERY COSMETIC</color>\n<color=#F58B27>HARMONY IS VERY TUFFcolor>\n<color=#BE27F5>OUR OWNERS ARE : HARMONY : ZEON :</color>\n<color=#31F527>uhh tung tung</color>\n\n<color=#5E27F5>DISCORD.GG/XxttY9YjgF</color>",
         "TOBAlreadyOwnCompTxt": "DISCORD.GG/XxttY9YjgF",
-        "TOBAlreadyOwnPurchaseBundle": "CHRISTMAS TAG",
+        "TOBAlreadyOwnPurchaseBundle": "NIGHT TAG",
         "TOBDefCompTxt": "DISCORD.GG/XxttY9YjgF",
-        "TOBDefPurchaseBtnDefTxt": "CHRISTMAS TAG",
+        "TOBDefPurchaseBtnDefTxt": "NIGHT TAG",
         # Legal and Versions
         "EnableCustomAuthentication": True,
         "LatestPrivacyPolicyVersion": "2024.09.20",

@@ -205,7 +205,7 @@ def titledata():
         "SeasonalStoreBoardSign": "<color=red>RATE THE GAME 5 STARS!</color>\n<color=purple>.GG/VHTGKGEGTS</color>",
         # Text and Messages
         "EmptyFlashbackText": "FLOOR TWO NOW OPEN\n FOR BUSINESS\n\nSTILL SEARCHING FOR\nBOX LABELED 2021",
-        "MOTD": "<color=#2a00ff>WELCOME TOO NIGHT TAG!</color>\n\n<color=#d7ff00>CURRENT UPDATE: NOWRUZ 2024</color>\n<color=#cacfd2>BOOST THE DISCORD FOR ALL COSMETICS</color>\n<color=#b300ff>HARMONY IS SIGMA</color>\n<color=#6417ff>OWNERS : ZEON : HARMONY :</color>\n<color=#ac1a00>uhh</color>\n\n<color=#91A3B0>DISCORD.GG/VHTGKGEGTS</color>",
+        "MOTD": "<color=#2a00ff>WELCOME TOO NIGHT TAG!</color>\n\n<color=#d7ff00>CURRENT UPDATE: FALL 2024</color>\n<color=#cacfd2>BOOST THE DISCORD FOR ALL COSMETICS</color>\n<color=#b300ff>HARMONY IS SIGMA</color>\n<color=#6417ff>OWNERS : ZEON : HARMONY :</color>\n<color=#ac1a00>uhh</color>\n\n<color=#91A3B0>DISCORD.GG/VHTGKGEGTS</color>",
         "TOBAlreadyOwnCompTxt": "DISCORD.GG/VHTGKGEGTS",
         "TOBAlreadyOwnPurchaseBundle": "NIGHT TAG",
         "TOBDefCompTxt": "DISCORD.GG/VHTGKGEGTS",

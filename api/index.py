@@ -79,7 +79,7 @@ def main():
                 <h1 style="color: #eedd82; font-size: 48px; text-shadow: 2px 2px 4px rgba(0,0,0,0.5);">
                     Wsp Broksie. This is a private backend!
                 </h1>
-                <p style="font-size: 18px;">TUNG TUNG TUNG TUNG SAHUR!</p>
+                <p style="font-size: 18px;">Christmas Tag Backend Server Running Smoothly!</p>
                 <img src="https://aicdn.picsart.com/275c6ae1-73a4-4cee-b3f5-45ccfa4499ae.png" alt="if u see this text it dont work" style="max-width: 500px; border-radius: 20px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); display: block; margin: 30px auto;">
                 <p style="font-size: 14px; opacity: 0.8;">Image loads when the server works!</p>
             </body>
@@ -198,23 +198,23 @@ def titledata():
             "Elder", "Honey", "Nurse", "Doctor", "Rebel", "Shape", "Ally", "Driver", "Deputy", "Wizard"
         ],
         # Bundle and Sign Configurations
-        "BundleBoardSign": "<color=#ff4141>DISCORD.GG/XxttY9YjgF</color>",
-        "BundleKioskButton": "<color=#ff4141>DISCORD.GG/XxttY9YjgF</color>",
-        "BundleKioskSign": "<color=#ff4141>DISCORD.GG/XxttY9YjgF</color>",
-        "BundleLargeSign": "<color=#ff4141>DISCORD.GG/XxttY9YjgF</color>",
-        "SeasonalStoreBoardSign": "<color=red>RATE THE GAME 5 STARS!</color>\n<color=blue>.GG/XxttY9YjgF</color>",
+        "BundleBoardSign": "<color=#ff4141>DISCORD.GG/VHTGKGEGTS</color>",
+        "BundleKioskButton": "<color=#ff4141>DISCORD.GG/VHTGKGEGTS</color>",
+        "BundleKioskSign": "<color=#ff4141>DISCORD.GG/VHTGKGEGTS</color>",
+        "BundleLargeSign": "<color=#ff4141>DISCORD.GG/VHTGKGEGTS</color>",
+        "SeasonalStoreBoardSign": "<color=red>RATE THE GAME 5 STARS!</color>\n<color=purple>.GG/VHTGKGEGTS</color>",
         # Text and Messages
         "EmptyFlashbackText": "FLOOR TWO NOW OPEN\n FOR BUSINESS\n\nSTILL SEARCHING FOR\nBOX LABELED 2021",
-        "MOTD": "<color=#FFC0CB>WELCOME TO NIGHT TAG!</color>\n\n<color=#F5F227>CURRENT UPDATE: NOWRUZ 2024</color>\n<color=#F527EE>BOOST THE DISC 5 TIMES FOR EVERY COSMETIC</color>\n<color=#F58B27>HARMONY IS VERY TUFFcolor>\n<color=#BE27F5>OUR OWNERS ARE : HARMONY : ZEON :</color>\n<color=#31F527>uhh tung tung</color>\n\n<color=#5E27F5>DISCORD.GG/XxttY9YjgF</color>",
-        "TOBAlreadyOwnCompTxt": "DISCORD.GG/XxttY9YjgF",
+        "MOTD": "<color=#2a00ff>WELCOME TOO NIGHT TAG!</color>\n\n<color=#d7ff00>CURRENT UPDATE: NOWRUZ 2024</color>\n<color=#cacfd2>BOOST THE DISCORD FOR ALL COSMETICS</color>\n<color=#b300ff>HARMONY IS SIGMA</color>\n<color=#6417ff>OWNERS : ZEON : HARMONY :</color>\n<color=#ac1a00>uhh</color>\n\n<color=#91A3B0>DISCORD.GG/VHTGKGEGTS</color>",
+        "TOBAlreadyOwnCompTxt": "DISCORD.GG/VHTGKGEGTS",
         "TOBAlreadyOwnPurchaseBundle": "NIGHT TAG",
-        "TOBDefCompTxt": "DISCORD.GG/XxttY9YjgF",
+        "TOBDefCompTxt": "DISCORD.GG/VHTGKGEGTS",
         "TOBDefPurchaseBtnDefTxt": "NIGHT TAG",
         # Legal and Versions
         "EnableCustomAuthentication": True,
         "LatestPrivacyPolicyVersion": "2024.09.20",
         "LatestTOSVersion": "2024.09.20",
-        "TOS_2024.09.20": "DISCORD.GG/XxttY9YjgF",
+        "TOS_2024.09.20": "DISCORD.GG/VHTGKGEGTS",
         "EnableTwoFactorAuth": False,
         "MaxLoginAttempts": 5,
         "SessionTimeoutMinutes": 30,
@@ -246,7 +246,7 @@ def titledata():
         "RegionPriority": ["US", "EU", "AS"],
         "EnableSpectatorMode": True,
         "TutorialEnabled": True,
-        "NewsFeedUrl": "https://DISCORD.GG/XxttY9YjgF",
+        "NewsFeedUrl": "https://DISCORD.GG/VHTGKGEGTS",
         "UpdateCheckInterval": 3600,
         "BackupInterval": 86400,
         "LogLevel": "INFO",
@@ -291,7 +291,7 @@ def titledata():
         "CustomSkinUploadLimit": 5,
         "ServerRestartIntervalHours": 24,
         "MaxReportCountPerDay": 5,
-        "BanAppealUrl": "https://DISCORD.GG/XxttY9YjgF",
+        "BanAppealUrl": "https://DISCORD.GG/VHTGKGEGTS",
         "EnableCrossplay": True,
         "DefaultFOV": 90,
         "MaxFOV": 120,
@@ -312,7 +312,7 @@ def titledata():
         "EnableVoiceModeration": True,
         "VoiceModerationThreshold": 0.9,
         "EnablePlayerFeedback": True,
-        "FeedbackSubmissionUrl": "https://DISCORD.GG/XxttY9YjgF/feedback"
+        "FeedbackSubmissionUrl": "https://DISCORD.GG/VHTGKGEGTS/feedback"
     }
     return jsonify(response_data)
 

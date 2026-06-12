@@ -202,10 +202,10 @@ def titledata():
         "BundleKioskButton": "<color=#ff4141>discord.gg/8HBSpmrZer</color>",
         "BundleKioskSign": "<color=#ff4141>discord.gg/8HBSpmrZer</color>",
         "BundleLargeSign": "<color=#ff4141>discord.gg/8HBSpmrZer</color>",
-        "SeasonalStoreBoardSign": "<color=red>RATE THE GAME 5 STARS!</color>\n<color=purple>#FFA500</color>",
+        "SeasonalStoreBoardSign": "<color=red>RATE THE GAME 5 STARS!</color>\n<color=purple>discord.gg/m3NcxSSqsF</color>",
         # Text and Messages
         "EmptyFlashbackText": "FLOOR TWO NOW OPEN\n FOR BUSINESS\n\nSTILL SEARCHING FOR\nBOX LABELED 2021",
-        "MOTD": "<color=#FFA500>WELCOME TOO NIGHT TAG!</color>\n\n<color=#FFA500>CURRENT UPDATE: HALLOWEEN FLASHBACK 2023</color>\n<color=#FFA500>BOOST THE DISCORD FOR ALL COSMETICS</color>\n<color=#FFA500>HARMONY IS SIGMA</color>\n<color=#FFA500>OWNERS : ZEON : HARMONY :</color>\n<color=#FFA500>HAVE FUN PLAYING NIGHT TAG!</color>\n\n<color=#FFA500>discord.gg/8HBSpmrZer</color>",
+        "MOTD": "<color=#FF2800>WELCOME TOO NIGHT TAG!</color>\n\n<color=#1AFF00>CURRENT UPDATE: SCIENCE 2024 FLASHBACK</color>\n<color=#0044FF>BOOST THE DISCORD FOR ALL COSMETICS</color>\n<color=#FF00FF>HARMONY IS SIGMA</color>\n<color=#00E1FF>OWNERS : ZEON : HARMONY :</color>\n<color=#3F00F2>HAVE FUN PLAYING NIGHT TAG!</color>\n\n<color=#C200F2>discord.gg/8HBSpmrZer</color>",
         "TOBAlreadyOwnCompTxt": "discord.gg/8HBSpmrZer",
         "TOBAlreadyOwnPurchaseBundle": "NIGHT TAG",
         "TOBDefCompTxt": "discord.gg/8HBSpmrZer",
